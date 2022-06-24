@@ -1,6 +1,8 @@
+using TL.Bookstore.API;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+DiContainer.Configure(builder);
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\.editorconfig" Link=".editorconfig" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.6" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TL.Bookstore.Infrastructure\TL.Bookstore.Infrastructure.csproj" />
+    <ProjectReference Include="..\TL.Bookstore.Messaging\TL.Bookstore.Messaging.csproj" />
+    <ProjectReference Include="..\TL.Bookstore.Repository\TL.Bookstore.Repository.csproj" />
+    <ProjectReference Include="..\TL.Bookstore.Service\TL.Bookstore.Service.csproj" />
+  </ItemGroup>
+
+</Project>
