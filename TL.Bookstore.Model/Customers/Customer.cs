@@ -19,5 +19,19 @@ namespace TL.Bookstore.Model.Customers
 		public virtual IEnumerable<BorrrowersCard> BorrrowersCards { get; private set; }
 
 		#endregion
+
+		#region Constructors
+
+		public Customer()
+		{
+
+		}
+
+		public Customer(string username) : base()
+		{
+			Username = username;
+		}
+
+		#endregion
 	}
 }

@@ -3,8 +3,10 @@ using Microsoft.EntityFrameworkCore;
 using TL.Bookstore.Contract.Books;
 using TL.Bookstore.Infrastructure.Configuration;
 using TL.Bookstore.Model.Books;
+using TL.Bookstore.Model.Customers;
 using TL.Bookstore.Repository;
 using TL.Bookstore.Repository.Books;
+using TL.Bookstore.Repository.Customers;
 using TL.Bookstore.Service.Books;
 using TL.Bookstore.Service.Books.Factory;
 using TL.Bookstore.Service.Books.Factory.Mapping;
@@ -20,8 +22,8 @@ namespace TL.Bookstore.API
 		{
 			ConfigureServices(builder.Services);
 			ConfigureRepositories(builder.Services, builder.Configuration);
+			ConfigureDatabase(builder.Services, builder.Configuration);
 			ConfigureMappingProfiles(builder.Services);
-
 		}
 
 		#endregion
@@ -38,8 +40,7 @@ namespace TL.Bookstore.API
 		private static void ConfigureRepositories(IServiceCollection services, IConfiguration config)
 		{
 			services.AddTransient<IBookRepository, BookRepository>();
-
-			ConfigureDatabase(services, config);
+			services.AddTransient<ICustomerRepository, CustomerRepository>();
 		}
 
 		private static void ConfigureDatabase(IServiceCollection services, IConfiguration config)

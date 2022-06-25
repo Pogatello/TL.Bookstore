@@ -44,9 +44,11 @@ namespace TL.Bookstore.Repository.Books
 			return await _dbContext.Books.SingleOrDefaultAsync(x => x.Isbn == isbn);
 		}
 
-		public Task<IEnumerable<Book>> GetBorrowedBooksAsync(string username)
+		public async Task<IEnumerable<Book>> GetBorrowedBooksAsync(long customerId)
 		{
-			throw new NotImplementedException();
+			return await _dbContext.Books
+				.Where(x => x.BorrrowersCards.Any(x => x.IsBorrowed && x.CustomerId == customerId))
+				.ToListAsync();
 		}
 
 		public Task UpdateBookAsync(Book book)

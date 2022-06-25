@@ -9,6 +9,8 @@ namespace TL.Bookstore.Contract.Books
 
 		Task<GetBookResponse> GetBookByIsbnAsync(GetBookRequest request);
 
+		Task<GetBorrowedBooksResponse> GetBorrowedBooksAsync(GetBorrowedBooksRequest request);
+
 		Task<ImportBooksResponse> ImportBooksFromADatasheetAsync(ImportBooksRequest request);
 	}
 }

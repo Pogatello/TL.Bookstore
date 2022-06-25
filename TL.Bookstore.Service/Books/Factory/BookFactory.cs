@@ -57,6 +57,15 @@ namespace TL.Bookstore.Service.Books.Factory
 			};
 		}
 
+		public GetBorrowedBooksResponse CreateGetBorrowedBooksResponse(IEnumerable<Book> books, bool success = true)
+		{
+			return new GetBorrowedBooksResponse
+			{
+				Books = books.MapToView(_mapper),
+				Success = success
+			};
+		}
+
 		#endregion
 	}
 }

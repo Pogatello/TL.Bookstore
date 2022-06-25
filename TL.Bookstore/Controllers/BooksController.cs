@@ -26,24 +26,6 @@ namespace TL.Bookstore.API.Controllers
 
 		#region BooksController
 
-		[HttpPost("ImportBooks")]
-		public async Task<IActionResult> ImportBooksAsync(IFormFile bookDatasheet)
-		{
-			if (bookDatasheet == null || bookDatasheet.Length == 0)
-			{
-				return BadRequest();
-			}
-
-			await _bookService.ImportBooksFromADatasheetAsync
-				(
-					new ImportBooksRequest
-					{
-						BookDatasheet = bookDatasheet
-					}
-				);
-
-			return Ok();
-		}
 
 		[HttpGet("GetAvailableBooks")]
 		public async Task<ActionResult<IEnumerable<BookView>>> GetAvailableBooksAsync(int? pageNumber, int? itemsPerPage)
@@ -68,6 +50,37 @@ namespace TL.Bookstore.API.Controllers
 				});
 
 			return Ok(response.Book);
+		}
+
+		[HttpGet("GetBorrowedBooks/{username}")]
+		public async Task<ActionResult<IEnumerable<BookView>>> GetBorrowedBooksAsync([FromRoute] string username)
+		{
+			var response = await _bookService.GetBorrowedBooksAsync(
+				new GetBorrowedBooksRequest
+				{
+					Username = username
+				});
+
+			return Ok(response.Books);
+		}
+
+		[HttpPost("ImportBooks")]
+		public async Task<IActionResult> ImportBooksAsync(IFormFile bookDatasheet)
+		{
+			if (bookDatasheet == null || bookDatasheet.Length == 0)
+			{
+				return BadRequest();
+			}
+
+			await _bookService.ImportBooksFromADatasheetAsync
+				(
+					new ImportBooksRequest
+					{
+						BookDatasheet = bookDatasheet
+					}
+				);
+
+			return Ok();
 		}
 
 		#endregion

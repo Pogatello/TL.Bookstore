@@ -13,5 +13,7 @@ namespace TL.Bookstore.Service.Books.Factory
 		GetAvailableBooksResponse CreateGetAvailableBooksResponse(IEnumerable<Book> books, bool success = true);
 
 		GetBookResponse CreateGetBookResponse(Book book, bool success = true);
+
+		GetBorrowedBooksResponse CreateGetBorrowedBooksResponse(IEnumerable<Book> books, bool success = true);
 	}
 }
