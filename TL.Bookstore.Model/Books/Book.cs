@@ -22,9 +22,9 @@
 
 		public int PageNumbers { get; private set; }
 
-		public long RatingsCount { get; private set; }
+		public int RatingsCount { get; private set; }
 
-		public long TextReviewsCount { get; private set; }
+		public int TextReviewsCount { get; private set; }
 
 		public DateTime PublicationDate { get; private set; }
 
