@@ -11,5 +11,7 @@ namespace TL.Bookstore.Service.Books.Factory
 		ImportBooksResponse CreateImportBooksResponse(bool success = true);
 
 		GetAvailableBooksResponse CreateGetAvailableBooksResponse(IEnumerable<Book> books, bool success = true);
+
+		GetBookResponse CreateGetBookResponse(Book book, bool success = true);
 	}
 }

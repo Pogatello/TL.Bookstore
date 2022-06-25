@@ -7,6 +7,8 @@ namespace TL.Bookstore.Contract.Books
 	{
 		Task<GetAvailableBooksResponse> GetAvailableBooksAsync(GetAvailableBooksRequest request);
 
+		Task<GetBookResponse> GetBookByIsbnAsync(GetBookRequest request);
+
 		Task<ImportBooksResponse> ImportBooksFromADatasheetAsync(ImportBooksRequest request);
 	}
 }

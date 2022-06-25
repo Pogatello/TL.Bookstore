@@ -39,9 +39,9 @@ namespace TL.Bookstore.Repository.Books
 						.ToListAsync();
 		}
 
-		public Task<Book> GetBookByISBNAsync(string isbn)
+		public async Task<Book> GetBookByIsbnAsync(string isbn)
 		{
-			throw new NotImplementedException();
+			return await _dbContext.Books.SingleOrDefaultAsync(x => x.Isbn == isbn);
 		}
 
 		public Task<IEnumerable<Book>> GetBorrowedBooksAsync(string username)

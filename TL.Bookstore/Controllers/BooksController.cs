@@ -58,6 +58,18 @@ namespace TL.Bookstore.API.Controllers
 			return Ok(response.Books);
 		}
 
+		[HttpGet("GetBookByIsbn/{isbn}")]
+		public async Task<ActionResult<BookView>> GetBookByIsbnAsync([FromRoute] string isbn)
+		{
+			var response = await _bookService.GetBookByIsbnAsync(
+				new GetBookRequest
+				{
+					Isbn = isbn
+				});
+
+			return Ok(response.Book);
+		}
+
 		#endregion
 	}
 }

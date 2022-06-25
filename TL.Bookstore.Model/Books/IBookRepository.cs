@@ -6,7 +6,7 @@ namespace TL.Bookstore.Model.Books
 	{
 		Task<IEnumerable<Book>> GetAvailableBooksAsync(GetBooksQuery query);
 
-		Task<Book> GetBookByISBNAsync(string isbn);
+		Task<Book> GetBookByIsbnAsync(string isbn);
 
 		Task<IEnumerable<Book>> GetBorrowedBooksAsync(string username);
 

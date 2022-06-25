@@ -16,5 +16,10 @@ namespace TL.Bookstore.Service.Books.Factory.Mapping
 		{
 			return mapper.Map<IEnumerable<BookView>>(model);
 		}
+
+		public static BookView MapToView(this Book model, IMapper mapper)
+		{
+			return mapper.Map<BookView>(model);
+		}
 	}
 }

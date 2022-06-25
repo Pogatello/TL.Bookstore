@@ -48,6 +48,15 @@ namespace TL.Bookstore.Service.Books.Factory
 			};
 		}
 
+		public GetBookResponse CreateGetBookResponse(Book book, bool success = true)
+		{
+			return new GetBookResponse
+			{
+				Book = book.MapToView(_mapper),
+				Success = success
+			};
+		}
+
 		#endregion
 	}
 }

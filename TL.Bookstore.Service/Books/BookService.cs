@@ -1,4 +1,5 @@
 ﻿using TL.Bookstore.Contract.Books;
+using TL.Bookstore.Infrastructure;
 using TL.Bookstore.Messaging.Books.Request;
 using TL.Bookstore.Messaging.Books.Response;
 using TL.Bookstore.Model.Books;
@@ -36,6 +37,18 @@ namespace TL.Bookstore.Service.Books
 			var books = await _bookRepository.GetAvailableBooksAsync(query);
 
 			return _bookFactory.CreateGetAvailableBooksResponse(books);
+		}
+
+		public async Task<GetBookResponse> GetBookByIsbnAsync(GetBookRequest request)
+		{
+			var book = await _bookRepository.GetBookByIsbnAsync(request.Isbn);
+
+			if(book == null)
+			{
+				throw new ResourceNotFoundException();
+			}
+
+			return _bookFactory.CreateGetBookResponse(book);
 		}
 
 		public async Task<ImportBooksResponse> ImportBooksFromADatasheetAsync(ImportBooksRequest request)
