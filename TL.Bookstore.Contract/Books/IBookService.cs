@@ -6,5 +6,7 @@ namespace TL.Bookstore.Contract.Books
 	public interface IBookService
 	{
 		Task<GetAvailableBooksResponse> GetAvailableBooksAsync(GetAvailableBooksRequest request);
+
+		Task<ImportBooksResponse> ImportBooksFromADatasheetAsync(ImportBooksRequest request);
 	}
 }

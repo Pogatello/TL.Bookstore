@@ -1,10 +1,13 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using TL.Bookstore.Contract.Books;
 using TL.Bookstore.Infrastructure.Configuration;
 using TL.Bookstore.Model.Books;
 using TL.Bookstore.Repository;
 using TL.Bookstore.Repository.Books;
 using TL.Bookstore.Service.Books;
+using TL.Bookstore.Service.Books.Factory;
+using TL.Bookstore.Service.Books.Factory.Mapping;
 
 namespace TL.Bookstore.API
 {
@@ -17,6 +20,8 @@ namespace TL.Bookstore.API
 		{
 			ConfigureServices(builder.Services);
 			ConfigureRepositories(builder.Services, builder.Configuration);
+			ConfigureMappingProfiles(builder.Services);
+
 		}
 
 		#endregion
@@ -27,6 +32,7 @@ namespace TL.Bookstore.API
 		private static void ConfigureServices(IServiceCollection services)
 		{
 			services.AddTransient<IBookService, BookService>();
+			services.AddTransient<IBookFactory, BookFactory>();
 		}
 
 		private static void ConfigureRepositories(IServiceCollection services, IConfiguration config)
@@ -45,6 +51,16 @@ namespace TL.Bookstore.API
 				,
 				ServiceLifetime.Scoped
 			);
+		}
+
+		public static void ConfigureMappingProfiles(IServiceCollection services)
+		{
+			var mapperConfig = new MapperConfiguration(mc =>
+			{
+				mc.AddProfile(new BookMappingProfile());
+			});
+
+			services.AddSingleton(mapperConfig.CreateMapper());
 		}
 
 		#endregion
