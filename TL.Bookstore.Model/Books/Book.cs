@@ -50,7 +50,7 @@ namespace TL.Bookstore.Model.Books
 		{
 			if (BorrrowersCards.HasElements() && BorrrowersCards.Any(x=>x.IsBorrowed))
 			{
-				BrokenRules.Add(BookBusinessRules.BookAlreadyBorrowedRule);
+				AddBrokenRule(BookBusinessRules.BookAlreadyBorrowedRule);
 			}
 
 			ThrowExceptionIfThereAreBrokenRules();

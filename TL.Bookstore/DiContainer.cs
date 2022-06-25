@@ -2,6 +2,9 @@
 using Microsoft.EntityFrameworkCore;
 using TL.Bookstore.Contract.Books;
 using TL.Bookstore.Infrastructure.Configuration;
+using TL.Bookstore.Infrastructure.Exceptions.Factories;
+using TL.Bookstore.Infrastructure.Exceptions.Handlers;
+using TL.Bookstore.Infrastructure.Filters;
 using TL.Bookstore.Model.Books;
 using TL.Bookstore.Model.Customers;
 using TL.Bookstore.Repository;
@@ -24,6 +27,7 @@ namespace TL.Bookstore.API
 			ConfigureRepositories(builder.Services, builder.Configuration);
 			ConfigureDatabase(builder.Services, builder.Configuration);
 			ConfigureMappingProfiles(builder.Services);
+			ConfigureExceptionHandling(builder.Services);
 		}
 
 		#endregion
@@ -62,6 +66,20 @@ namespace TL.Bookstore.API
 			});
 
 			services.AddSingleton(mapperConfig.CreateMapper());
+		}
+
+		private static void ConfigureExceptionHandling(IServiceCollection services)
+		{
+			services.AddTransient<IExceptionHandlerFactory, ExceptionHandlerFactory>();
+
+			services.AddTransient<IExceptionHandler, DefaultExceptionHandler>();
+			services.AddTransient<IExceptionHandler, ValidationEntityExceptionHandler>();
+			services.AddTransient<IExceptionHandler, ResourceNotFoundExceptionHandler>();
+
+			services.AddControllers(options =>
+			{
+				options.Filters.Add<ExceptionFilter>();
+			});
 		}
 
 		#endregion

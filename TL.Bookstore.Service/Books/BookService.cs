@@ -101,6 +101,8 @@ namespace TL.Bookstore.Service.Books
 			if(customer == null)
 			{
 				customer = new Customer(username);
+				customer.ValidateForCreate();
+
 				await _customerRepository.CreateCustomerAsync(customer);
 			}
 
