@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using TL.Bookstore.Infrastructure.Exceptions;
+using TL.Bookstore.Infrastructure.Helpers;
 
 namespace TL.Bookstore.Model.Common
 {
@@ -12,6 +13,15 @@ namespace TL.Bookstore.Model.Common
 
 		#endregion
 
+		#region Constructors
+
+		public ValidationEntity()
+		{
+			BrokenRules = new List<string>();
+		}
+
+		#endregion
+
 		#region Public Methods
 
 		public void AddBrokenRule(string message)
@@ -21,7 +31,7 @@ namespace TL.Bookstore.Model.Common
 
 		public void ThrowExceptionIfThereAreBrokenRules()
 		{
-			if (BrokenRules.Any())
+			if (BrokenRules.HasElements())
 			{
 				throw new ValidationEntityException(FormatBrokenRulesForExceptionMessage());
 			}

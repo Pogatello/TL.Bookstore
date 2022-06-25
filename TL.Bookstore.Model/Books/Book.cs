@@ -40,7 +40,7 @@ namespace TL.Bookstore.Model.Books
 
 		#region Navigation Properties
 
-		public virtual IEnumerable<BorrrowersCard> BorrrowersCards { get; private set; }
+		public virtual List<BorrrowersCard> BorrrowersCards { get; private set; }
 
 		#endregion
 
@@ -59,7 +59,7 @@ namespace TL.Bookstore.Model.Books
 		public void AddNewBorrowerCardEntry(long customerId)
 		{
 			var newEntry = new BorrrowersCard(true, customerId, Id);
-			BorrrowersCards.Append(newEntry);			
+			BorrrowersCards.Add(newEntry);			
 		}
 
 		#endregion
