@@ -45,10 +45,17 @@ namespace TL.Bookstore.API.Controllers
 			return Ok();
 		}
 
-		[HttpGet]
-		public async Task<IEnumerable<BookView>> GetAvailableBooksAsync()
+		[HttpGet("GetAvailableBooks")]
+		public async Task<ActionResult<IEnumerable<BookView>>> GetAvailableBooksAsync(int? pageNumber, int? itemsPerPage)
 		{
-			return await Task.FromResult(new List<BookView>());
+			var response = await _bookService.GetAvailableBooksAsync(
+				new GetAvailableBooksRequest 
+				{ 
+					PageNumber = pageNumber ?? default,
+					ItemsPerPage = itemsPerPage ?? default
+				});
+
+			return Ok(response.Books);
 		}
 
 		#endregion

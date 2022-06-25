@@ -33,10 +33,19 @@ namespace TL.Bookstore.Service.Books.Factory
 
 			return booksDto.MapToModel(_mapper);
 		}
-
+		
 		public ImportBooksResponse CreateImportBooksResponse(bool success = true)
 		{
 			return new ImportBooksResponse{ Success = success };
+		}
+
+		public GetAvailableBooksResponse CreateGetAvailableBooksResponse(IEnumerable<Book> books, bool success = true)
+		{
+			return new GetAvailableBooksResponse
+			{
+				Books = books.MapToView(_mapper),
+				Success = success 
+			};
 		}
 
 		#endregion

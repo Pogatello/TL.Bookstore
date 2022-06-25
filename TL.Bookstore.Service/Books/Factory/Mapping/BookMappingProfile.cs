@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using TL.Bookstore.Messaging.Books;
+using TL.Bookstore.Messaging.Books.View;
 using TL.Bookstore.Model.Books;
 
 namespace TL.Bookstore.Service.Books.Factory.Mapping
@@ -27,6 +28,8 @@ namespace TL.Bookstore.Service.Books.Factory.Mapping
 			#endregion
 
 			#region ToView
+
+			CreateMap<Book, BookView>();
 
 			#endregion
 		}

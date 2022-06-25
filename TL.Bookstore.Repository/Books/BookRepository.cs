@@ -1,4 +1,6 @@
-﻿using TL.Bookstore.Model.Books;
+﻿using Microsoft.EntityFrameworkCore;
+using TL.Bookstore.Model.Books;
+using TL.Bookstore.Model.Books.Query;
 
 namespace TL.Bookstore.Repository.Books
 {
@@ -28,9 +30,13 @@ namespace TL.Bookstore.Repository.Books
 			await _dbContext.SaveChangesAsync();
 		}
 
-		public Task<IEnumerable<Book>> GetAvailableBooksAsync()
+		public async Task<IEnumerable<Book>> GetAvailableBooksAsync(GetBooksQuery query)
 		{
-			throw new NotImplementedException();
+			return await _dbContext.Books
+						.Where(b => !b.BorrrowersCards.Any(x => x.IsBorrowed))
+						.Skip(query.PageNumber * query.ItemsPerPage)
+						.Take(query.ItemsPerPage)
+						.ToListAsync();
 		}
 
 		public Task<Book> GetBookByISBNAsync(string isbn)

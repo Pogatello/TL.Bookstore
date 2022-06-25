@@ -2,6 +2,7 @@
 using TL.Bookstore.Messaging.Books.Request;
 using TL.Bookstore.Messaging.Books.Response;
 using TL.Bookstore.Model.Books;
+using TL.Bookstore.Model.Books.Query;
 using TL.Bookstore.Service.Books.Factory;
 
 namespace TL.Bookstore.Service.Books
@@ -27,9 +28,14 @@ namespace TL.Bookstore.Service.Books
 
 		#region IBookService
 
-		public Task<GetAvailableBooksResponse> GetAvailableBooksAsync(GetAvailableBooksRequest request)
+		public async Task<GetAvailableBooksResponse> GetAvailableBooksAsync(GetAvailableBooksRequest request)
 		{
-			throw new NotImplementedException();
+			var query = new GetBooksQuery(request.PageNumber, request.ItemsPerPage);
+			query.Validate();
+
+			var books = await _bookRepository.GetAvailableBooksAsync(query);
+
+			return _bookFactory.CreateGetAvailableBooksResponse(books);
 		}
 
 		public async Task<ImportBooksResponse> ImportBooksFromADatasheetAsync(ImportBooksRequest request)

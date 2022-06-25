@@ -1,8 +1,10 @@
-﻿namespace TL.Bookstore.Model.Books
+﻿using TL.Bookstore.Model.Books.Query;
+
+namespace TL.Bookstore.Model.Books
 {
 	public interface IBookRepository
 	{
-		Task<IEnumerable<Book>> GetAvailableBooksAsync();
+		Task<IEnumerable<Book>> GetAvailableBooksAsync(GetBooksQuery query);
 
 		Task<Book> GetBookByISBNAsync(string isbn);
 

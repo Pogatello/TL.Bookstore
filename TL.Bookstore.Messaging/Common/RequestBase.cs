@@ -2,5 +2,6 @@
 {
 	public class RequestBase
 	{
+		public string Username { get; set; }
 	}
 }

@@ -9,5 +9,7 @@ namespace TL.Bookstore.Service.Books.Factory
 		IEnumerable<Book> CreateBooksFromADatasheet(IFormFile bookDatasheet);
 
 		ImportBooksResponse CreateImportBooksResponse(bool success = true);
+
+		GetAvailableBooksResponse CreateGetAvailableBooksResponse(IEnumerable<Book> books, bool success = true);
 	}
 }
