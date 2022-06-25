@@ -66,6 +66,15 @@ namespace TL.Bookstore.Service.Books.Factory
 			};
 		}
 
+		public BorrowBookResponse CreateBorrowBookResponse(Book book, bool success = true)
+		{
+			return new BorrowBookResponse
+			{
+				Book = book.MapToView(_mapper),
+				Success = success
+			};
+		}
+
 		#endregion
 	}
 }

@@ -71,6 +71,24 @@ namespace TL.Bookstore.Service.Books
 			return _bookFactory.CreateImportBooksResponse();
 		}
 
+		public async Task<BorrowBookResponse> BorrowBookAsync(BorrowBookRequest request)
+		{
+			var customer = await GetOrCreateCustomerIfNonExistent(request.Username);
+			var book = await _bookRepository.GetBookByIsbnAsync(request.Isbn);
+
+			if(book == null)
+			{
+				throw new ResourceNotFoundException();
+			}
+
+			book.ValidateForBorrowing();
+			book.AddNewBorrowerCardEntry(customer.Id);
+
+			await _bookRepository.UpdateBookAsync(book);
+
+			return _bookFactory.CreateBorrowBookResponse(book);
+		}
+
 		#endregion
 
 		#region Private Methods

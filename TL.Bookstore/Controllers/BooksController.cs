@@ -83,6 +83,21 @@ namespace TL.Bookstore.API.Controllers
 			return Ok();
 		}
 
+		[HttpPost("BorrowBook")]
+		public async Task<IActionResult> BorrowBookAsync(string username, string isbn)
+		{
+			await _bookService.BorrowBookAsync
+				(
+					new BorrowBookRequest
+					{
+						Username = username,
+						Isbn = isbn
+					}
+				);
+
+			return Ok();
+		}
+
 		#endregion
 	}
 }

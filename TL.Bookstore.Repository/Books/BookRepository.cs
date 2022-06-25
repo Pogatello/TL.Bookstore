@@ -41,7 +41,9 @@ namespace TL.Bookstore.Repository.Books
 
 		public async Task<Book> GetBookByIsbnAsync(string isbn)
 		{
-			return await _dbContext.Books.SingleOrDefaultAsync(x => x.Isbn == isbn);
+			return await _dbContext.Books
+				.Include(x=> x.BorrrowersCards)
+				.SingleOrDefaultAsync(x => x.Isbn == isbn);
 		}
 
 		public async Task<IEnumerable<Book>> GetBorrowedBooksAsync(long customerId)
@@ -51,9 +53,10 @@ namespace TL.Bookstore.Repository.Books
 				.ToListAsync();
 		}
 
-		public Task UpdateBookAsync(Book book)
+		public async Task UpdateBookAsync(Book book)
 		{
-			throw new NotImplementedException();
+			_dbContext.Books.Update(book);
+			await _dbContext.SaveChangesAsync();
 		}
 
 		#endregion

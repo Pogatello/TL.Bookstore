@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\TL.Bookstore.Infrastructure\TL.Bookstore.Infrastructure.csproj" />
+  </ItemGroup>
+
 </Project>

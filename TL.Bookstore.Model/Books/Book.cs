@@ -1,8 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using TL.Bookstore.Infrastructure.Helpers;
+using TL.Bookstore.Model.Books.BusinesRules;
+using TL.Bookstore.Model.Common;
 
 namespace TL.Bookstore.Model.Books
 {
-	public class Book
+	public class Book : ValidationEntity
 	{
 		#region Properties
 
@@ -38,6 +41,26 @@ namespace TL.Bookstore.Model.Books
 		#region Navigation Properties
 
 		public virtual IEnumerable<BorrrowersCard> BorrrowersCards { get; private set; }
+
+		#endregion
+
+		#region Public Methods
+
+		public void ValidateForBorrowing()
+		{
+			if (BorrrowersCards.HasElements() && BorrrowersCards.Any(x=>x.IsBorrowed))
+			{
+				BrokenRules.Add(BookBusinessRules.BookAlreadyBorrowedRule);
+			}
+
+			ThrowExceptionIfThereAreBrokenRules();
+		}
+
+		public void AddNewBorrowerCardEntry(long customerId)
+		{
+			var newEntry = new BorrrowersCard(true, customerId, Id);
+			BorrrowersCards.Append(newEntry);			
+		}
 
 		#endregion
 	}

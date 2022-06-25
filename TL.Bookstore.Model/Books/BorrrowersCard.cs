@@ -25,5 +25,21 @@ namespace TL.Bookstore.Model.Books
 		public virtual Customer Customer { get; private set; }
 
 		#endregion
+
+		#region Constructor
+
+		public BorrrowersCard()
+		{
+
+		}
+
+		public BorrrowersCard(bool isBorrowed, long customerId, long bookId)
+		{
+			IsBorrowed = isBorrowed;
+			CustomerId = customerId;
+			BookId = bookId;
+		}
+
+		#endregion
 	}
 }
