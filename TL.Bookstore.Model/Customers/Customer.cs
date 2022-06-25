@@ -1,4 +1,5 @@
-﻿using TL.Bookstore.Model.Books;
+﻿using System.ComponentModel.DataAnnotations;
+using TL.Bookstore.Model.Books;
 
 namespace TL.Bookstore.Model.Customers
 {
@@ -6,6 +7,7 @@ namespace TL.Bookstore.Model.Customers
 	{
 		#region Properties
 		
+		[Key]
 		public long Id { get; private set; }
 
 		public string Username { get; private set; }

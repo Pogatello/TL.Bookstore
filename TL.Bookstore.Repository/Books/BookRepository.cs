@@ -22,9 +22,10 @@ namespace TL.Bookstore.Repository.Books
 
 		#region IBookRepository
 
-		public Task CreateBooksAsync(IEnumerable<Book> books)
+		public async Task CreateBooksAsync(IEnumerable<Book> books)
 		{
-			throw new NotImplementedException();
+			await _dbContext.Books.AddRangeAsync(books);
+			await _dbContext.SaveChangesAsync();
 		}
 
 		public Task<IEnumerable<Book>> GetAvailableBooksAsync()

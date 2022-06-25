@@ -1,9 +1,12 @@
-﻿namespace TL.Bookstore.Model.Books
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace TL.Bookstore.Model.Books
 {
 	public class Book
 	{
 		#region Properties
 
+		[Key]
 		public long Id { get; private set; }
 
 		public long BookId { get; private set; }
